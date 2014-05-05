@@ -1,0 +1,34 @@
+<div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li class="active"><a ng-href="#">Home</a></li>
+        <li><a ng-href="#">About</a></li>
+        <li><a ng-href="#">Contact</a></li>
+    </ul>
+    <h2>{{entryDate | date:'EEEE dd MMMM yyyy'}}</h2>
+</div>
+
+<div class="row marketing">
+    <div class="col-md-8">
+        <div ng-controller="entriesViewCtrl" entries-view="0"></div>
+        <div ng-controller="addEntryFormCtrl" add-entry-form="0"></div>
+    </div>
+    <div class="col-md-4">
+        <div ng-controller="calendarCtrl" id="calendar" data-selected-date="{{selectedDate}}">
+            <div ui-calendar="uiConfig.calendar" ng-model="calendarEvents" calendar="dateCalendar"></div>
+        </div>
+        <dl id="projectTotals">
+            <dt ng-repeat-start="project in projectTotals">{{project.projectCode}}</dt>
+            <dd ng-repeat-end>{{project.totalHours | number: 2}}</dd>
+        </dl>
+        <dl id="stats">
+            <dt>Hours worked:</dt>
+            <dd>{{getHoursWorked() | number: 2}}<span class="msg" ng-show="getHoursWorked() > 8">&nbsp;GO HOME</span></dd>
+            <dt>Hours remaining:</dt>
+            <dd>{{8 - getHoursWorked() | number: 2}}</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2014 Sandy Drew</p>
+</div>

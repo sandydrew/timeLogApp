@@ -1,0 +1,10 @@
+<form id="addEntryForm" name="addEntryForm" ng-class="{filled: fieldsFilled()}">
+    <input type="text" name="startDate" ng-model="entry.startDate" ng-required="true" class="input-time"
+           ng-click="setupDefault()" ng-keydown="entry.startDate = timeKeyPress($event)" ng-blur="entry.startDate = timeBlurFormat($event)" ng-maxlength="5" />
+    <input type="text" name="endDate" ng-model="entry.endDate" ng-required="true" class="input-time"
+           ng-click="setupDefault()" ng-keydown="entry.endDate = timeKeyPress($event)" ng-blur="entry.endDate = timeBlurFormat($event)" maxlength="5" />
+    <input type="text" name="projectCode" ng-model="entry.projectCode" ng-required="true" class="input-code"
+           ng-click="setupDefault()" />
+    <input type="text" name="description" ng-model="entry.description" ng-required="true" class="input-description"
+           ng-click="setupDefault()" ng-keydown="saveKeyPress($event)" />
+</form>
