@@ -15,6 +15,9 @@ module.exports = function (grunt) {
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
+    //add preprocess
+    grunt.loadNpmTasks('grunt-preprocess');
+
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -324,6 +327,18 @@ module.exports = function (grunt) {
             ]
         },
 
+        preprocess: {
+            options: {
+                inline: true,
+                context: {
+                    DEBUG: false
+                }
+            },
+            html: {
+                src: [ '<%= yeoman.dist %>/index.html' ]
+            }
+        },
+
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
@@ -402,7 +417,8 @@ module.exports = function (grunt) {
         'uglify',
         'rev',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'preprocess:html'
     ]);
 
     grunt.registerTask('default', [

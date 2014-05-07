@@ -74,7 +74,6 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/services/mockServices.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/_calendar.js"></script>
 <script src="scripts/controllers/_entriesView.js"></script>
@@ -86,5 +85,12 @@
 <script src="scripts/services/ModalDialog.js"></script>
 <script src="scripts/services/ui-calendar.js"></script>
 <!-- endbuild -->
+
+<!-- @if DEBUG -->
+<!-- build:js({.tmp,app}) scripts/mocks.js -->
+<script src="scripts/services/mockServices.js"></script>
+<!-- endbuild -->
+<!-- @endif -->
+
 </body>
 </html>
