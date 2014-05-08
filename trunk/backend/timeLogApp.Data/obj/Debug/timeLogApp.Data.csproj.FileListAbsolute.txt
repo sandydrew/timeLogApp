@@ -1,7 +1,0 @@
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\bin\Debug\timeLogApp.Data.dll
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\bin\Debug\timeLogApp.Data.pdb
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\bin\Debug\Newtonsoft.Json.dll
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\bin\Debug\Newtonsoft.Json.xml
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\obj\Debug\timeLogApp.Data.dll
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\obj\Debug\timeLogApp.Data.pdb
-C:\Dev\SGD\timeLogApp\trunk\backend\timeLogApp.Data\obj\Debug\timeLogApp.Data.csprojResolveAssemblyReference.cache
