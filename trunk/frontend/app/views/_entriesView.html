@@ -1,0 +1,22 @@
+<ul class="entries fixedWidth">
+    <li ng-repeat="entry in entries" data-id="{{entry.entryId}}" ng-click="startEdit($index)">
+        <div ng-hide="editEntry[$index]">
+            <span>{{entry.startH | PadNumber: 2}}:{{entry.startM | PadNumber: 2}}</span>&nbsp;-
+            <span>{{entry.endH | PadNumber: 2}}:{{entry.endM | PadNumber: 2}}</span>
+            <span>{{entry.projectCode}}</span>
+            <span>{{entry.description}}</span>
+        </div>
+        <form id="editEntryForm{{$index}}" name="editEntryForm{{$index}}" ng-show="editEntry[$index]" ng-class="{filled: fieldsFilled($index)}" class="editEntryForm">
+            <input type="hidden" name="entryId" value="{{entry.entryId}}" />
+            <input type="text" name="startDate" ng-model="entry.startDate" ng-required="true" class="input-time"
+                   value="{{entry.startH}}:{{entry.startM}}" ng-keydown="entry.startDate = timeKeyPress($event)" ng-blur="entry.startDate = timeBlurFormat($event)" ng-maxlength="5" />
+            <input type="text" name="endDate" ng-model="entry.endDate" ng-required="true" class="input-time"
+                   value="{{entry.endH}}:{{entry.endM}}" ng-keydown="entry.endDate = timeKeyPress($event)" ng-blur="entry.endDate = timeBlurFormat($event)" maxlength="5" />
+            <input type="text" name="projectCode" ng-model="entry.projectCode" ng-required="true" class="input-code" />
+            <button ng-enabled="editEntryForm{{entry.entryId}}.$valid" ng-click="editSaveClick($event)"><span class="glyphicon glyphicon-ok"></span></button>
+            <button ng-click="editCancelClick()"><span class="glyphicon glyphicon-remove"></span></button>
+            <button ng-click="editDeleteClick($event)"><span class="glyphicon glyphicon-trash"></span></button>
+            <input type="text" name="description" ng-model="entry.description" ng-required="true" class="input-description" />
+        </form>
+    </li>
+</ul>

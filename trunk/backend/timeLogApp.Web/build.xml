@@ -1,0 +1,50 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <BuildOutput>..\..\../Builds\Debug</BuildOutput>
+        <FrontEndBuildOutput>..\..\Builds\Debug</FrontEndBuildOutput>
+        <OutputFolderName>Debug</OutputFolderName>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <BuildOutput>..\..\..\Builds\Release</BuildOutput>
+        <FrontEndBuildOutput>..\..\Builds\Release</FrontEndBuildOutput>
+        <OutputFolderName>Release</OutputFolderName>
+    </PropertyGroup>
+    <PropertyGroup>
+        <FrontEndSource>..\..\frontend</FrontEndSource>
+    </PropertyGroup>
+    <Target Name="AfterBuild_Website">
+        <!-- Assembly file definitions -->
+        <ItemGroup>
+            <AssemblyItem Include="bin\*.dll" />
+        </ItemGroup>
+        <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+            <AssemblyItem Include="bin\*.pdb" />
+        </ItemGroup>
+        <!-- Exclude configuration files out of the @Content item group -->
+        <ItemGroup>
+            <Content Remove="*.config" />
+            <Content Remove="build.xml" />
+        </ItemGroup>
+        <!-- run grunt if release. Takes a while if it's set on for every build. -->
+        <Exec Command="grunt" WorkingDirectory="$(FrontEndSource)" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+        <!-- clean the target folder -->
+        <Exec Command="rd /s /q $(OutputFolderName)" WorkingDirectory="$(BuildOutput)\..\" />
+        <!-- Copy front end files -->
+        <Exec Command="xcopy.exe dist\*.* $(FrontEndBuildOutput)\ /e /y" WorkingDirectory="$(FrontEndSource)" />
+        <!-- Copy project and necessary dependent assemblies -->
+        <Copy SourceFiles="@(AssemblyItem)" DestinationFolder="$(BuildOutput)\bin" SkipUnchangedFiles="false" />
+        <!-- Copy project content files -->
+        <Copy SourceFiles="@(Content)" DestinationFolder="$(BuildOutput)\%(relativedir)" SkipUnchangedFiles="false" />
+        <!-- Copy -->
+        <PropertyGroup>
+            <TransformInputFile>Web.config</TransformInputFile>
+            <TransformFile>Web.$(Configuration).config</TransformFile>
+            <TransformOutputFile>$(BuildOutput)/Web.config</TransformOutputFile>
+            <StackTraceEnabled>False</StackTraceEnabled>
+        </PropertyGroup>
+        <TransformXml Source="$(TransformInputFile)"
+          Transform="$(TransformFile)"
+          Destination="$(TransformOutputFile)"
+          StackTrace="$(StackTraceEnabled)" />
+    </Target>
+</Project>
