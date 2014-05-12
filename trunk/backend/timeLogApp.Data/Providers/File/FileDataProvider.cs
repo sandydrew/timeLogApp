@@ -21,6 +21,9 @@ namespace timeLogApp.Data.Providers.File
         {
             var entries = GetAllEntries();
             var concreteEntry = (Entry) entry;
+
+            //ensure the date doesn't have any hours, mins or seconds
+            concreteEntry.EntryDate = concreteEntry.EntryDate.Date;
             
             if (concreteEntry.EntryId == 0)
             {
