@@ -17,7 +17,7 @@ namespace timeLogApp.Web.Extensions
 
         public static bool IsYmdDate(this string inputDate)
         {
-            return Regex.IsMatch(inputDate, @"^\d{4}-\d{1,2}-\d{1,2}$")
+            return Regex.IsMatch(inputDate, @"^\d{4}-\d{1,2}-\d{1,2}$");
         }
     }
 }
