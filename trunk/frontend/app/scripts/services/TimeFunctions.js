@@ -27,8 +27,15 @@ angular.module('timeLogApp').factory('TimeFunctions', function () {
     };
 
     var getPaddedTime = function (dateTime, roundMinutesTo15) {
-        var hours = padNumber(dateTime.getHours(), 2);
-        var minutes = roundMinutesTo15 ? padNumber(roundMinutes(dateTime.getMinutes()), 2) : padNumber(dateTime.getMinutes(), 2);
+        var originalHours = dateTime.getHours();
+        var originalMinutes = dateTime.getMinutes();
+        var hours = padNumber(originalHours, 2);
+        var minutes = roundMinutesTo15 ? padNumber(roundMinutes(originalMinutes), 2) : padNumber(originalMinutes, 2);
+
+        //round up if near the top of the hour.
+        if (roundMinutesTo15 && originalMinutes > 45 && minutes === '00') {
+            hours = padNumber(originalHours + 1, 2);
+        }
 
         return hours + ':' + minutes;
     };

@@ -20,4 +20,5 @@ describe('Controller: addEntryFormCtrl', function () {
     }));
 
     //not actually sure how to setup tests for this yet.
+
 });

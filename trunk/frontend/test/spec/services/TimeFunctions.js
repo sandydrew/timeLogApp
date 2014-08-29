@@ -66,6 +66,16 @@ describe('Service: TimeFunctions', function () {
         expect(timeFns.getPaddedTime(testDate, true)).toEqual('21:00');
     });
 
+    it('should correctly convert a date to a padded time with rounding up to the next hour (3)', function () {
+        var testDate = new Date(2014, 7, 29, 16, 57, 0);
+        expect(timeFns.getPaddedTime(testDate, true)).toEqual('17:00');
+    });
+
+    it('should correctly convert a date to a padded time with rounding up to the next hour (4)', function () {
+        var testDate = new Date(2014, 7, 29, 9, 57, 0);
+        expect(timeFns.getPaddedTime(testDate, true)).toEqual('10:00');
+    });
+
     //addToPaddedTime
     it('should correctly add 15 minutes to a time', function () {
         expect(timeFns.addToPaddedTime('09:00', 0, 15)).toEqual('09:15');
