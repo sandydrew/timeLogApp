@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Http;
-using System.Web.Mvc;
 using StructureMap;
 using timeLogApp.Data.Providers;
 using timeLogApp.Web.Extensions;
@@ -23,19 +20,30 @@ namespace timeLogApp.Web.Controllers
         //}
 
         // GET api/entries/2014-01-01
-        public IEnumerable<EntryViewModel> Get(string id)
+        public IEnumerable<EntryViewModel> Get(string startDate)
         {
-            var splitDate = id.Split('-');
-
             //validate
-            if (!Regex.IsMatch(id, @"^\d{4}-\d{1,2}-\d{1,2}$"))
+            if (!startDate.IsYmdDate())
             {
                 throw new Exception("Invalid input");
             }
 
             return ObjectFactory.GetInstance<IDataProvider>()
-                    .GetEntries(new DateTime(int.Parse(splitDate[0]), int.Parse(splitDate[1]), int.Parse(splitDate[2]), 0, 0, 0, DateTimeKind.Utc))
+                    .GetEntries(startDate.ParseUtcDate())
                     .Select(x => x.AsViewModel());
+        }
+
+        public IEnumerable<EntryViewModel> Get(string startDate, string endDate)
+        {
+            //validate
+            if (!startDate.IsYmdDate() || !endDate.IsYmdDate())
+            {
+                throw new Exception("Invalid input");
+            }
+
+            return ObjectFactory.GetInstance<IDataProvider>()
+                .GetMultiDayEntries(startDate.ParseUtcDate(), endDate.ParseUtcDate())
+                .Select(x => x.AsViewModel());
         }
         
         // POST api/entries

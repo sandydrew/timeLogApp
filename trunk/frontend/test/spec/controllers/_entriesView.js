@@ -136,6 +136,14 @@ describe('Controller: entriesViewCtrl', function () {
     it('should cancel editing when the cancel button is pressed', function () {
         scope.editEntry[1] = true;
 
+        var event = {
+            currentTarget: {
+                parentElement: {
+                    id: 'formName1'
+                }
+            }
+        };
+
         var edit = false;
         for (var i = 0; i < scope.editEntry.length; i++) {
             if (scope.editEntry[i] === true) {
@@ -145,12 +153,12 @@ describe('Controller: entriesViewCtrl', function () {
         }
 
         modalDialog.confirmFalse();
-        scope.editCancelClick();
+        scope.editCancelClick(event);
 
         expect(edit).toBeTruthy();
 
         modalDialog.confirmTrue();
-        scope.editCancelClick();
+        scope.editCancelClick(event);
 
         //should be false, but we're using route.reload, so it won't show up here.
         expect(edit).toBeTruthy();

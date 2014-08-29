@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "timeLogApp.Web.Tests", "tim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "timeLogApp.Data", "timeLogApp.Data\timeLogApp.Data.csproj", "{7C694190-D5C6-4B4C-96DA-C6AA72FBE135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "timeLogApp.Shared", "timeLogApp.Shared\timeLogApp.Shared.csproj", "{9A88E304-5728-4FF3-A971-665D5CBEBA1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{7C694190-D5C6-4B4C-96DA-C6AA72FBE135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C694190-D5C6-4B4C-96DA-C6AA72FBE135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C694190-D5C6-4B4C-96DA-C6AA72FBE135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A88E304-5728-4FF3-A971-665D5CBEBA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A88E304-5728-4FF3-A971-665D5CBEBA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A88E304-5728-4FF3-A971-665D5CBEBA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A88E304-5728-4FF3-A971-665D5CBEBA1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

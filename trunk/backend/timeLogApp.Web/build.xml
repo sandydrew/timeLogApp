@@ -26,7 +26,7 @@
             <Content Remove="build.xml" />
         </ItemGroup>
         <!-- run grunt if release. Takes a while if it's set on for every build. -->
-        <Exec Command="grunt" WorkingDirectory="$(FrontEndSource)" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+        <Exec Command="grunt build" WorkingDirectory="$(FrontEndSource)" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
         <!-- clean the target folder -->
         <Exec Command="rd /s /q $(OutputFolderName)" WorkingDirectory="$(BuildOutput)\..\" />
         <!-- Copy front end files -->

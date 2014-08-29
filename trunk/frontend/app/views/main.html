@@ -21,10 +21,12 @@
             <dd ng-repeat-end>{{project.totalHours | number: 2}}</dd>
         </dl>
         <dl id="stats">
-            <dt>Hours worked:</dt>
-            <dd>{{getHoursWorked() | number: 2}}<span class="msg" ng-show="getHoursWorked() > 8">&nbsp;GO HOME</span></dd>
-            <dt>Hours remaining:</dt>
+            <dt ng-class="{hoursalert: getHoursWorked() >= 10, hourswarning: getHoursWorked() > 8.5}">Hours worked:</dt>
+            <dd>{{getHoursWorked() | number: 2}}</dd>
+            <dt ng-class="{hoursalert: getHoursWorked() < 7.5, hourswarning: getHoursWorked() < 8}">Hours remaining:</dt>
             <dd>{{8 - getHoursWorked() | number: 2}}</dd>
+            <dt>This week:</dt>
+            <dd>{{ getTotalThisWeek() | number: 2}}</dd>
         </dl>
     </div>
 </div>

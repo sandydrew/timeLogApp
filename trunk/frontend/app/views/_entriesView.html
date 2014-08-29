@@ -14,7 +14,7 @@
                    value="{{entry.endH}}:{{entry.endM}}" ng-keydown="entry.endDate = timeKeyPress($event)" ng-blur="entry.endDate = timeBlurFormat($event)" maxlength="5" />
             <input type="text" name="projectCode" ng-model="entry.projectCode" ng-required="true" class="input-code" />
             <button ng-enabled="editEntryForm{{entry.entryId}}.$valid" ng-click="editSaveClick($event)"><span class="glyphicon glyphicon-ok"></span></button>
-            <button ng-click="editCancelClick()"><span class="glyphicon glyphicon-remove"></span></button>
+            <button ng-click="editCancelClick($event)"><span class="glyphicon glyphicon-remove"></span></button>
             <button ng-click="editDeleteClick($event)"><span class="glyphicon glyphicon-trash"></span></button>
             <input type="text" name="description" ng-model="entry.description" ng-required="true" class="input-description" />
         </form>

@@ -1,10 +1,11 @@
+/* global $:false */
 /**
  * Created by sdrew on 2/05/2014.
  */
 'use strict';
 
 angular.module('timeLogApp')
-    .controller('entriesViewCtrl', ['$scope', '$route', 'ModalDialog', 'EntryActions', 'TimeFunctions', function($scope, $route, ModalDialog, entryActions, timeFunctions) {
+    .controller('entriesViewCtrl', ['$scope', '$route', 'ModalDialog', 'EntryActions', 'TimeFunctions', function ($scope, $route, ModalDialog, entryActions, timeFunctions) {
 
         $scope.entries = $scope.$parent.entries;
         $scope.editEntry = [];
@@ -37,14 +38,19 @@ angular.module('timeLogApp')
         };
 
         $scope.editDeleteClick = function ($event) {
-            console.log('confirm');
             if (ModalDialog.confirm('Are you sure you want to delete this entry?')) {
                 entryActions.deleteEntry($event, $scope.entries);
                 $route.reload();
             }
         };
 
-        $scope.editCancelClick = function () {
+        $scope.editCancelClick = function ($event) {
+            if($($event.currentTarget.parentElement).find('input.ng-dirty').size() === 0) {
+                //nothing changed, don't prompt.
+                $route.reload();
+                return;
+            }
+
             if (ModalDialog.confirm('Are you sure? (Changes will be lost.)')) {
                 $route.reload();
             }
@@ -75,7 +81,7 @@ angular.module('timeLogApp')
             var matches = $event.currentTarget.parentElement.id.match(/^.*(\d+)$/);
             var entry = $scope.entries[parseInt(matches[1], 10)];
             entry.entryDate = $scope.entryDate;
-            entryActions.saveEntry($event, entry, function() {
+            entryActions.saveEntry($event, entry, function () {
                 clearEditEntries();
                 $route.reload();
             });

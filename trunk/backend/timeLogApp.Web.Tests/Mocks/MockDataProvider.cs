@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using timeLogApp.Data.Entities;
 using timeLogApp.Data.Providers;
+using timeLogApp.Shared.Extensions;
 
 namespace timeLogApp.Web.Tests.Mocks
 {
@@ -63,6 +64,11 @@ namespace timeLogApp.Web.Tests.Mocks
         public IEnumerable<IEntry> GetEntries(DateTime date)
         {
             return Entries.Where(x => x.EntryDate == date);
+        }
+
+        public IEnumerable<IEntry> GetMultiDayEntries(DateTime startDate, DateTime endDate)
+        {
+            return Entries.Where(x => x.EntryDate.IsBetween(startDate, endDate));
         }
 
         public void DeleteEntry(int entryId)

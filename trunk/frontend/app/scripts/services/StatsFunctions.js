@@ -9,10 +9,8 @@ angular.module('timeLogApp').factory('StatsFunctions', function () {
     var getHoursWorked = function (entries) {
         var minutes = 0;
 
-
         for (var entryIndex = 0; entryIndex < entries.length; entryIndex++) {
-            var entry = entries[entryIndex];
-            minutes += getEntryMinutesWorked(entry);
+            minutes += getEntryMinutesWorked(entries[entryIndex]);
         }
 
         return minutes / 60;

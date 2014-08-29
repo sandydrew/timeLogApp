@@ -8,6 +8,7 @@ namespace timeLogApp.Data.Providers
     {
         int UpdateEntry(IEntry entry);
         IEnumerable<IEntry> GetEntries(DateTime date);
+        IEnumerable<IEntry> GetMultiDayEntries(DateTime startDate, DateTime endDate);
         void DeleteEntry(int entryId);
     }
 }

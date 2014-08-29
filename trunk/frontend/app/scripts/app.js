@@ -15,7 +15,11 @@ angular.module('timeLogApp', [
                 controller: 'MainCtrl',
                 resolve: {
                     entries: ['$route', 'MultiEntryLoader', 'TimeFunctions', function($route, MultiEntryLoader, TimeFunctions) {
-                        return new MultiEntryLoader(TimeFunctions.parseYMD($route.current.params.entryDate));
+                        var startDate = TimeFunctions.parseYMD($route.current.params.entryDate);
+                        startDate.setDate(startDate.getDate() - ((startDate.getDay() === 0 ? 7 : startDate.getDay()) - 1));
+                        var endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                        endDate.setDate(startDate.getDate() + 7);
+                        return new MultiEntryLoader(startDate, endDate);
                     }]
                 }
             })
@@ -24,7 +28,11 @@ angular.module('timeLogApp', [
                 controller: 'MainCtrl',
                 resolve: {
                     entries: ['MultiEntryLoader', 'TimeFunctions', function(MultiEntryLoader, TimeFunctions) {
-                        return new MultiEntryLoader(TimeFunctions.getCurrentDate());
+                        var startDate = TimeFunctions.getCurrentDate();
+                        startDate.setDate(startDate.getDate() - ((startDate.getDay() === 0 ? 7 : startDate.getDay()) - 1));
+                        var endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                        endDate.setDate(startDate.getDate() + 7);
+                        return new MultiEntryLoader(startDate, endDate);
                     }]
                 }
             })

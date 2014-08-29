@@ -34,6 +34,18 @@ namespace timeLogApp.Web.Tests.Controllers
         }
 
         [TestMethod]
+        public void GetMultipleByDate()
+        {
+            //Arrange
+            var controller = new EntriesController();
+
+            //Act
+            IEnumerable<EntryViewModel> result = controller.Get("2014-04-15", "2014-04-18");
+
+            Assert.AreEqual(9, result.Count());
+        }
+
+        [TestMethod]
         public void Insert()
         {
             // Arrange

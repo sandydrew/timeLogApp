@@ -2,6 +2,7 @@
 @angry: #ffbbbb;
 @highlightBlue: #9ec9ee;
 @messageRed: red;
+@messageOrange: orange;
 @normalFont: "Helvetica Neue",Helvetica,Arial,sans-serif;
 @fixedFont: Consolas,"Courier New";
 
@@ -103,6 +104,12 @@
     float: left;
     clear: both;
     width: 80%;
+    &.hourswarning {
+      color: @messageOrange;
+    }
+    &.hoursalert {
+      color: @messageRed;
+    }
   }
   dd {
     float: left;

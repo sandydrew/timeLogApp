@@ -135,6 +135,10 @@
       <Project>{7c694190-d5c6-4b4c-96da-c6aa72fbe135}</Project>
       <Name>timeLogApp.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\timeLogApp.Shared\timeLogApp.Shared.csproj">
+      <Project>{9a88e304-5728-4ff3-a971-665d5cbeba1a}</Project>
+      <Name>timeLogApp.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\timeLogApp.Web\timeLogApp.Web.csproj">
       <Project>{D9621BE5-A576-4E4B-8640-86231038DDDA}</Project>
       <Name>timeLogApp.Web</Name>

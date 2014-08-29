@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using timeLogApp.Data.Entities;
+using timeLogApp.Shared.Extensions;
 
 namespace timeLogApp.Data.Providers.File
 {
@@ -20,11 +20,11 @@ namespace timeLogApp.Data.Providers.File
         public int UpdateEntry(IEntry entry)
         {
             var entries = GetAllEntries();
-            var concreteEntry = (Entry) entry;
+            var concreteEntry = (Entry)entry;
 
             //ensure the date doesn't have any hours, mins or seconds
             concreteEntry.EntryDate = concreteEntry.EntryDate.Date;
-            
+
             if (concreteEntry.EntryId == 0)
             {
                 //insert new.
@@ -52,6 +52,12 @@ namespace timeLogApp.Data.Providers.File
             return GetAllEntries().Where(x => x.EntryDate.ToUniversalTime() == date);
         }
 
+        public IEnumerable<IEntry> GetMultiDayEntries(DateTime startDate, DateTime endDate)
+        {
+            return GetAllEntries()
+                    .Where(x => x.EntryDate.ToUniversalTime().IsBetween(startDate, endDate));
+        }
+
         public void DeleteEntry(int entryId)
         {
             var entries = GetAllEntries();
@@ -71,7 +77,7 @@ namespace timeLogApp.Data.Providers.File
             lock (Locks.GetLockForKey(PhysicalFilePath))
             {
                 using (var sr = new StreamReader(PhysicalFilePath))
-                using(var jtr = new JsonTextReader(sr))
+                using (var jtr = new JsonTextReader(sr))
                 {
                     var se = new JsonSerializer();
                     return se.Deserialize<IEnumerable<FileEntry>>(jtr).Select(x => x.AsEntry()).ToList();
